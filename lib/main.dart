@@ -48,16 +48,27 @@ class _HomePageState extends State<HomePage> {
         children: [
           TextField(
             controller: _email,
-            decoration: const InputDecoration(hintText: 'Enter Email Address',
+            decoration: const InputDecoration(
+              hintText: 'Enter Email Address',
             ),
           ),
           TextField(
             controller: _password,
-            decoration: const InputDecoration(hintText: 'Enter Your Password',
+            decoration: const InputDecoration(
+              hintText: 'Enter Your Password',
             ),
           ),
           TextButton(
-            onPressed: () async {},
+            onPressed: () async {
+              final email = _email.text;
+              final password = _password.text;
+              final userCredential =
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: email,
+                password: password,
+              );
+              print(userCredential);
+            },
             child: const Text('Register'),
           ),
         ],
